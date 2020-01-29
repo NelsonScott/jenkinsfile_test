@@ -1,5 +1,16 @@
 pipeline {
   agent any
+  parameters {
+        string(name: 'BadGitHash',
+          defaultValue: '--Required--',
+          description: 'A known bad Hash')
+        string(name: 'GoodGitHash',
+          defaultValue: '--Required--',
+          description: 'A known good Hash')
+        string(name: 'CommandToRun',
+          defaultValue: '--Required--',
+          description: 'The CMD to run to Verify Success/Failure')
+    }
   stages {
     stage('Initialize Git Bisect') {
       steps {
