@@ -6,6 +6,7 @@ pipeline {
   parameters {
         string(name: 'GoodGitHash', defaultValue: 'Required', description: 'Last good git hash')
         string(name: 'BadGitHash', defaultValue: 'Required', description: 'Known bad git hash')
+        string(name: 'CommandToRun', defaultValue: 'Required', description: 'Command To Run to Verify Health')
     }
   stages {
     stage('Initialize Git Bisect') {
@@ -13,16 +14,20 @@ pipeline {
         echo 'Initializing Git Bisect'
         sh 'git bisect start'
         sh 'git bisect good "${GoodGitHash}"'
-        sh 'git bisect bad "${params.BadGitHash}"'
+        sh 'git bisect bad "${BadGitHash}"'
       }
     }
 
     stage('Run Command') {
       steps {
-        sh 'git bisect run "${params.CommandToRun}"'
-        echo 'Running "${params.CommandToRun}"'
+        echo 'Running "${CommandToRun}"'
+        sh 'git bisect run "${CommandToRun}"'
       }
     }
-
+    post {
+        always {
+            deleteDir()
+        }
+    }
   }
 }
