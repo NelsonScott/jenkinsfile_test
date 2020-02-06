@@ -24,10 +24,5 @@ pipeline {
         sh 'git bisect run "${CommandToRun}"'
       }
     }
-    post {
-        always {
-            deleteDir()
-        }
-    }
   }
 }
