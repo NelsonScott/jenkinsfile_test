@@ -5,7 +5,7 @@ pipeline {
       steps {
         echo 'Initializing Git Bisect'
         sh 'git bisect start'
-        sh 'git bisect good "${params.GoodGitHash}"'
+        sh 'git bisect good "${GoodGitHash}"'
         sh 'git bisect bad "${params.BadGitHash}"'
       }
     }
