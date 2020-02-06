@@ -20,7 +20,6 @@ pipeline {
 
     stage('Run Command') {
       steps {
-        echo 'Running "${CommandToRun}"'
         sh 'git bisect run "${CommandToRun}"'
       }
     }
