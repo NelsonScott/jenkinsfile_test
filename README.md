@@ -1,2 +1,1 @@
-trigger rebuild
-force a change
+Simple repo to learn more about jenkins configuration & using Jenkinsfiles
