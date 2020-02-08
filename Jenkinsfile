@@ -1,8 +1,5 @@
 pipeline {
   agent any
-  triggers {
-        githubPush()
-      }
   parameters {
         string(name: 'GoodGitHash', defaultValue: 'Required', description: 'Last good git hash')
         string(name: 'BadGitHash', defaultValue: 'Required', description: 'Known bad git hash')
