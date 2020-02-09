@@ -1,5 +1,10 @@
 pipeline {
-  agent any
+  agent {
+    kubernetes {
+      label 'jenkins-slave'  // all your pods will be named with this prefix, followed by a unique id
+      idleMinutes 5  // how long the pod will live after no jobs have run on it
+    }
+  }
   parameters {
         string(name: 'GoodGitHash', defaultValue: 'Required', description: 'Last good git hash')
         string(name: 'BadGitHash', defaultValue: 'Required', description: 'Known bad git hash')
